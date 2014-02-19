@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Word Count Test Page</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+
+function update_list() {
+	$.ajax({
+		url: 'http://127.0.0.1:8000/words',
+		type: 'GET',
+		success: function(result) {
+			$("#wordlist").empty();
+			for (var key in result) {
+			   	if (result.hasOwnProperty(key)) {
+					$("#wordlist").append("<li>" + key + ": " + result[key] + "</li>");
+				}
+			}
+		}
+	});
+}
+
+$(document).ready( function() {
+    $('#send').click( function() {
+	var word = $("#word").val();
+        $.ajax({
+	        url: 'http://127.0.0.1:8000/word',
+	        type: 'PUT',
+		data: {word: word},
+	        success: function(result) {
+			$("#word").val("");
+			update_list();
+	        },
+		error: function(result) {
+			var error = jQuery.parseJSON(result.responseText);
+			alert(error['error']);
+		}
+        });       
+    });
+});
+</script>
+</head>
+<body>
+	Word list:
+	<ul id="wordlist"></ul>
+	<br />
+	Send a word:
+	<input type="text" id="word" />
+	<button id="send">Send</button>
+</body>
+</html>
