@@ -64,12 +64,19 @@ mechanism because fabric does not provide summation out of the box. It can be do
 
 1. Create five VMs with IPs in the range 192.168,99.100-104
 2. Create a python virtual environment (I used virtualenvwrapper), and install the packages according to the requirements file
+
     $ mkvirtualenv test && cd test
     $ pip install -r requirements.txt
+
 3. Run the fabric command
+
     $ fab run_full
+
 4. Run the report
+
     $ python report.py
-  The output will be like:
+
+The output will look like:
+
     Success: 5
     Failures: 0
