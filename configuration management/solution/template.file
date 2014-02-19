@@ -1,0 +1,9 @@
+option 1234
+speed 88mph
+capacitor_type flux
+# Replace this
+widget_type X
+# ... with this:
+# widget_type (output from facter -p widget)
+model delorean
+avoid shopping_mall_parking_lots
